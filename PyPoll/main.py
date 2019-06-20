@@ -3,6 +3,7 @@
 
 import os
 import csv
+from datetime import date
 
 # Variables and arrays
 i = 0
@@ -70,6 +71,33 @@ with open(csvpath, newline="") as csvfile:
     print(f'...................................................')
     print(f'Winner: {Per_Name_Combo[Winner]}')
     print(f'---------------------------------------------------')
+
+    #Export Metrics to Text File
+    Report_Date = date.today()
+    Metrics_Date = Report_Date.strftime("%m_%d_%Y")
+    
+    with open ("Metrics_" + Metrics_Date + ".txt", "w") as Metrics_File:
+        Metrics_File.write("Electronic Results\n")
+        Metrics_File.write("-----------------------------------\n")
+        Metrics_File.write(f'Total Votes: {int(i)}\n')
+        Metrics_File.write(f'------------------------------------\n')
+        Metrics_File.write(f'{Candidates_List[0]}: {Khan_win_perc}% ({w})\n')
+        Metrics_File.write(f'{Candidates_List[1]}: {Correy_win_perc}% ({z})\n')
+        Metrics_File.write(f'{Candidates_List[2]}: {Li_win_perc}% ({l})\n')
+        Metrics_File.write(f'{Candidates_List[3]}: {OTooley_win_perc}% ({o})\n')
+        Metrics_File.write(f'...................................................\n')
+        Metrics_File.write(f'Winner: {Per_Name_Combo[Winner]}\n')
+        Metrics_File.write(f'---------------------------------------------------\n')
+            
+        
+        
+        
+
+        
+
+
+   
+        
 
 
 

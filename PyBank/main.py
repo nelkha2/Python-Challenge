@@ -4,6 +4,7 @@
 #Reading CSV file: raw data
 import os
 import csv
+from datetime import date
 
 # Variables for storing data from csv file and running loops  
 Dates = []
@@ -41,7 +42,7 @@ with open(csvpath, newline = "") as csvfile:
     Min_Monthly_Change = int(min(Profit_Losses_Changes))
     Monthly_Changes_Combo = dict (zip(Profit_Losses_Changes,Dates))
     
-    #Print Report
+    #Print Metrics Report
     print("Financial Analysis")
     print("----------------------------------------------------")
     print(f'Total Months: {i}')
@@ -50,6 +51,25 @@ with open(csvpath, newline = "") as csvfile:
     print(f'Greatest Increase in Profits: {Monthly_Changes_Combo[int(Max_Monthly_Change)]} (${Max_Monthly_Change})')
     print(f'Greatest Decrease in Profits: {Monthly_Changes_Combo[int(Min_Monthly_Change)]} (${Min_Monthly_Change})')
     print(f'----------------------------------------------------')
+
+    #Export Metrics to Text File
+    Report_Date = date.today()
+    Metrics_Date = Report_Date.strftime("%m_%d_%Y")
+    
+    with open ("Metrics_" + Metrics_Date + ".txt", "w") as Metrics_File:
+        Metrics_File.write("Financial Analysis\n")
+        Metrics_File.write("-----------------------------------\n")
+        Metrics_File.write(f'Net Profit/Loss: ${total}\n')
+        Metrics_File.write(f'Average Monthly Change: ${Monthly_Ave}\n') 
+        Metrics_File.write(f'Greatest Increase in Profits: {Monthly_Changes_Combo[int(Max_Monthly_Change)]} (${Max_Monthly_Change}\n')
+        Metrics_File.write(f'Greatest Decrease in Profits: {Monthly_Changes_Combo[int(Min_Monthly_Change)]} (${Min_Monthly_Change})\n')
+        Metrics_File.write(f'------------------------------------\n')
+            
+        
+        
+
+
+
 
     
 
